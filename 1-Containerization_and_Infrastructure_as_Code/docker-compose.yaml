@@ -1,0 +1,28 @@
+services:
+  mydatabase:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=ada
+      - POSTGRES_PASSWORD=adaroot
+      - POSTGRES_DB=homework
+    volumes:
+      - "./homework_postgres_data:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=ada@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=adaroot
+    volumes:
+      - "pgadmin_homework:/var/lib/pgadmin:rw"
+    ports:
+      - "8080:80"
+
+volumes:
+  pgadmin_homework:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./pgadmin_homework
