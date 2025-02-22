@@ -4,23 +4,23 @@
     )
 }}
 
-with trips_data as (
-    select * from {{ ref("fact_trips") }}
+WITH trips_data AS (
+    select * FROM {{ ref("fact_trips") }}
     ),
-quarterly_revenue as (
-    select service_type, year, quarter, year_quarter, sum(total_amount) as revenue
-    from trips_data
-    group by 1,2, 3, 4
+quarterly_revenue AS (
+    SELECT service_type, year, quarter, year_quarter, sum(total_amount) AS revenue
+    FROM trips_data
+    GROUP BY 1,2, 3, 4
 )
-select
+SELECT
     service_type,
     year,
     quarter,
     year_quarter,
-    revenue as curr_year_rev,
+    revenue AS curr_year_rev,
     LAG(revenue) OVER(PARTITION BY quarter ORDER BY year) as last_year_rev,
     round(
         (revenue - LAG(revenue) OVER(PARTITION BY quarter ORDER BY year))
          / LAG(revenue) OVER(PARTITION BY quarter ORDER BY year) * 100, 2
-    ) as yoy_rev_growth_percentage
-from quarterly_revenue 
+    ) AS yoy_rev_growth_percentage
+FROM quarterly_revenue 
