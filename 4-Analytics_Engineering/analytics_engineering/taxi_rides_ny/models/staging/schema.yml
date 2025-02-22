@@ -8,6 +8,7 @@ sources:
     tables:
       - name: green_taxi_data
       - name: yellow_taxi_data
+      - name: fhv_taxi_data
          # freshness:
            # error_after: {count: 6, period: hour}
 
