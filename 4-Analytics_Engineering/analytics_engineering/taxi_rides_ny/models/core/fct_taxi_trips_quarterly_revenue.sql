@@ -13,14 +13,14 @@ quarterly_revenue AS (
     GROUP BY 1,2, 3, 4
 )
 SELECT
-    service_type,
-    year,
-    quarter,
-    year_quarter,
-    revenue AS curr_year_rev,
-    LAG(revenue) OVER(PARTITION BY quarter ORDER BY year) as last_year_rev,
+    q1.service_type,
+    q1.year,
+    q1.quarter,
+    q1.year_quarter,
+    q1.revenue AS curr_year_rev,
+    q2.revenue AS last_year_rev,
     round(
-        (revenue - LAG(revenue) OVER(PARTITION BY quarter ORDER BY year))
-         / LAG(revenue) OVER(PARTITION BY quarter ORDER BY year) * 100, 2
-    ) AS yoy_rev_growth_percentage
-FROM quarterly_revenue 
+        (q1.revenue - q2.revenue)
+         / q2.revenue * 100, 2
+     ) AS yoy_rev_growth_percentage
+FROM quarterly_revenue q1 join quarterly_revenue q2 on q1.quarter = q2.quarter and q1.year = q2.year + 1
