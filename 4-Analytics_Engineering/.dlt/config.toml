@@ -6,4 +6,4 @@ log_level="WARNING"  # the system log level of dlt
 dlthub_telemetry = true
 
 [sources.filesystem]
-bucket_url = "gs://adaoraah-terra-bucket/green_trips" # please set me up!
+bucket_url = "gs://adaoraah-terra-bucket/" # please set me up!
