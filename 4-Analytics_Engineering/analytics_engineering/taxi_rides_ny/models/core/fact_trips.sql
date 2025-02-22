@@ -52,7 +52,7 @@ select trips_unioned.tripid,
     EXTRACT(YEAR FROM pickup_datetime) as year,
     EXTRACT(QUARTER FROM pickup_datetime) as quarter,
     CONCAT(EXTRACT(YEAR FROM pickup_datetime), '/Q', EXTRACT(QUARTER FROM pickup_datetime)) AS year_quarter,
-    EXTRACT(QUARTER FROM pickup_datetime) as month
+    EXTRACT(MONTH FROM pickup_datetime) as month
 from trips_unioned
 inner join dim_zones as pickup_zone
 on trips_unioned.pickup_locationid = pickup_zone.locationid

@@ -1,4 +1,3 @@
-
 {{
     config(
         materialized='table'
@@ -17,7 +16,7 @@ valid_trips AS(
     FROM trips_data
     WHERE fare_amount > 0 
         AND trip_distance > 0 
-        AND payment_type_description IN ('Cash', 'Credit Card')
+        AND payment_type_description IN ('Cash', 'Credit card')
 )
 SELECT
     service_type,

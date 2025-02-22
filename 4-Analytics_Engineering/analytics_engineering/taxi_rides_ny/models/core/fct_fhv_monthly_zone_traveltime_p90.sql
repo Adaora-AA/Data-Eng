@@ -16,5 +16,5 @@ SELECT
         dropoff_locationid,
         pickup_zone,
         dropoff_zone,
-    PERCENTILE_CONT(trip_duration, 0.90) OVER (PARTITION BY year, month,pickup_locationid,pickup_locationid) AS p90_trip_duration
+    PERCENTILE_CONT(trip_duration, 0.90) OVER (PARTITION BY year, month,pickup_locationid,dropoff_locationid) AS p90_trip_duration
 FROM trip_durations
